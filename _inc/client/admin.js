@@ -62,3 +62,28 @@ function render() {
 		container
 	);
 }
+
+let hash = window.location.hash;
+hash = hash.split( '?' )[0];
+
+if ( '#/' === hash || '#/dashboard' === hash ) {
+	let subNavItem = jQuery( '#toplevel_page_jetpack' ).find( 'li' ).filter( ':contains("Dashboard")' );
+	subNavItem[0].classList.add( 'current' );
+} else if ( '#/general' === hash ) {
+	let subNavItem = jQuery( '#toplevel_page_jetpack' ).find( 'li' ).filter( ':contains("Settings")' );
+	subNavItem[0].classList.add( 'current' );
+}
+
+document.getElementById( 'toplevel_page_jetpack' ).onclick = function ( e ) {
+	console.log( e.target.innerHTML );
+	jQuery( '.current' ).each( function( i, obj ) {
+		jQuery( obj ).removeClass( 'current' );
+	} );
+
+	if ( e.target.innerHTML === 'Jetpack' ) {
+		let subNavItem = jQuery( '#toplevel_page_jetpack' ).find( 'li' ).filter( ':contains("Dashboard")' );
+		subNavItem[0].classList.add( 'current' );
+	}
+
+	e.target.parentNode.classList.add( 'current' );
+};
