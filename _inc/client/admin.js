@@ -63,25 +63,29 @@ function render() {
 	);
 }
 
+// For adding a class on page load.
 let hash = window.location.hash;
 hash = hash.split( '?' )[0];
-
 if ( '#/' === hash || '#/dashboard' === hash ) {
-	let subNavItem = jQuery( '#toplevel_page_jetpack' ).find( 'li' ).filter( ':contains("Dashboard")' );
+	let subNavItem = jQuery( '#toplevel_page_jetpack' ).find( 'li' ).filter( function( index ) {
+		return index === 1;
+	} );
 	subNavItem[0].classList.add( 'current' );
 } else if ( '#/general' === hash ) {
-	let subNavItem = jQuery( '#toplevel_page_jetpack' ).find( 'li' ).filter( ':contains("Settings")' );
+	let subNavItem = jQuery( '#toplevel_page_jetpack' ).find( 'li' ).filter( function( index ) {
+		return index === 2;
+	} );
 	subNavItem[0].classList.add( 'current' );
 }
 
+// For adding the class on menu click.  
 document.getElementById( 'toplevel_page_jetpack' ).onclick = function ( e ) {
-	console.log( e.target.innerHTML );
 	jQuery( '.current' ).each( function( i, obj ) {
 		jQuery( obj ).removeClass( 'current' );
 	} );
 
 	if ( e.target.innerHTML === 'Jetpack' ) {
-		let subNavItem = jQuery( '#toplevel_page_jetpack' ).find( 'li' ).filter( ':contains("Dashboard")' );
+		let subNavItem = jQuery( '#toplevel_page_jetpack' ).find( 'li' ).filter( e.target );
 		subNavItem[0].classList.add( 'current' );
 	}
 
