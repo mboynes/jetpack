@@ -79,15 +79,19 @@ if ( '#/' === hash || '#/dashboard' === hash ) {
 }
 
 // For adding the class on menu click.  
-document.getElementById( 'toplevel_page_jetpack' ).onclick = function ( e ) {
-	jQuery( '.current' ).each( function( i, obj ) {
-		jQuery( obj ).removeClass( 'current' );
-	} );
+jQuery( 'body' ).on( 'click', '#toplevel_page_jetpack, #toplevel_page_jetpack li', function ( event ) {
+	var $this = jQuery( this );
 
-	if ( e.target.innerHTML === 'Jetpack' ) {
-		let subNavItem = jQuery( '#toplevel_page_jetpack' ).find( 'li' ).filter( e.target );
-		subNavItem[0].classList.add( 'current' );
+	event.stopPropagation();
+
+	if ( $this.hasClass( 'wp-has-submenu' ) ) {
+		jQuery( '#toplevel_page_jetpack .wp-submenu .wp-first-item' )
+			.addClass( 'current' )
+				.siblings()
+			.removeClass( 'current' );
+		return;
 	}
 
-	e.target.parentNode.classList.add( 'current' );
-};
+	$this.siblings().removeClass( 'current' );
+	$this.addClass( 'current' );
+} );
