@@ -11,6 +11,7 @@ import assign from 'lodash/assign';
  */
 import Masthead from 'components/masthead';
 import Navigation from 'components/navigation';
+import NavigationSettings from 'components/navigation-settings';
 import JetpackConnect from 'components/jetpack-connect';
 import JumpStart from 'components/jumpstart';
 import { getJumpStartStatus } from 'state/jumpstart';
@@ -57,25 +58,41 @@ const Main = React.createClass( {
 			return <JetpackConnect { ...this.props } />
 		}
 
-		let pageComponent;
+		let pageComponent,
+			navComponent = <Navigation { ...this.props } />;
 		switch ( route ) {
 			case '/dashboard':
 				pageComponent = <AtAGlance { ...this.props } />;
 				break;
+			case '/apps':
+				pageComponent = 'this will be the APPS page';
+				break;
+			case '/professional':
+				pageComponent = 'this will be the PROFESSIONAL page';
+				break;
+			case '/settings':
+				navComponent = <NavigationSettings { ...this.props } />;
+				pageComponent = <GeneralSettings { ...this.props } />;
+				break;
+			case '/general':
+				navComponent = <NavigationSettings { ...this.props } />;
+				pageComponent = <GeneralSettings { ...this.props } />;
+				break;
 			case '/engagement':
+				navComponent = <NavigationSettings { ...this.props } />;
 				pageComponent = <Engagement { ...this.props } />;
 				break;
 			case '/security':
+				navComponent = <NavigationSettings { ...this.props } />;
 				pageComponent = <Security { ...this.props } />;
 				break;
-			case '/health':
+			case '/appearance':
+				navComponent = <NavigationSettings { ...this.props } />;
 				pageComponent = <Health { ...this.props } />;
 				break;
-			case '/more':
+			case '/writing':
+				navComponent = <NavigationSettings { ...this.props } />;
 				pageComponent = <More { ...this.props } />;
-				break;
-			case '/general':
-				pageComponent = <GeneralSettings { ...this.props } />;
 				break;
 
 			default:
@@ -84,7 +101,7 @@ const Main = React.createClass( {
 
 		return (
 			<div>
-				<Navigation { ...this.props } />
+				{ navComponent }
 				{ pageComponent }
 			</div>
 		);

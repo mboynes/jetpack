@@ -51,11 +51,14 @@ function render() {
 				<Router history={ history }>
 					<Route path='/' component={ Main } />
 					<Route path='/dashboard' component={ Main } />
+					<Route path='/apps' component={ Main } />
+					<Route path='/professional' component={ Main } />
+					<Route path='/settings' component={ Main } />
+					<Route path='/general' component={ Main } />
 					<Route path='/engagement' component={ Main } />
 					<Route path='/security' component={ Main } />
-					<Route path='/health' component={ Main } />
-					<Route path='/more' component={ Main } />
-					<Route path='/general' component={ Main } />
+					<Route path='/appearance' component={ Main } />
+					<Route path='/writing' component={ Main } />
 				</Router>
 			</Provider>
 		</div>,
@@ -71,7 +74,7 @@ if ( '#/' === hash || '#/dashboard' === hash ) {
 		return index === 1;
 	} );
 	subNavItem[0].classList.add( 'current' );
-} else if ( '#/general' === hash ) {
+} else if ( '#/settings' === hash ) {
 	let subNavItem = jQuery( '#toplevel_page_jetpack' ).find( 'li' ).filter( function( index ) {
 		return index === 2;
 	} );
