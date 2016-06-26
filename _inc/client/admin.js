@@ -85,11 +85,7 @@ jQuery( 'body' ).on( 'click', '#toplevel_page_jetpack, #toplevel_page_jetpack li
 	event.stopPropagation();
 
 	if ( $this.hasClass( 'wp-has-submenu' ) ) {
-		jQuery( '#toplevel_page_jetpack .wp-submenu .wp-first-item' )
-			.addClass( 'current' )
-				.siblings()
-			.removeClass( 'current' );
-		return;
+		$this = jQuery( '.wp-submenu .wp-first-item', '#toplevel_page_jetpack' );
 	}
 
 	$this.siblings().removeClass( 'current' );
